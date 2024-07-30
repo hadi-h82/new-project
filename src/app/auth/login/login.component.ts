@@ -12,6 +12,14 @@ import _ from "lodash";
 export class LoginComponent implements OnInit{
 
   form:FormGroup;
+  showError: boolean = false;
+  textError: string = '* incorrect username or password'
+  validForm = {
+    userName: 'hadi',
+    password: '123456',
+  };
+
+
   constructor(private router: Router,private fb: FormBuilder){
     this.form = this.fb.group({
       userName: [null, [Validators.required]],
@@ -19,10 +27,6 @@ export class LoginComponent implements OnInit{
      })
   }
 
-validForm = {
-  userName: 'hadi',
-  password: '123456',
-};
   ngOnInit(): void {
 
   }
@@ -30,7 +34,7 @@ validForm = {
 
   submit(){
    
-    (_.isEqual(this.validForm,this.form.value)) ? this.router.navigate(['/panel']) : '';
+    (_.isEqual(this.validForm,this.form.value)) ? this.router.navigate(['/panel']) : this.showError = true;
 
   }
 
