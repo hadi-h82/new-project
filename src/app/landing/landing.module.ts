@@ -11,9 +11,7 @@ import { MaterialModule } from '../material/material.module';
   declarations: [LandingComponent],
   imports: [
     CommonModule,
-    LandingRoutingModule,
-    MaterialModule
-    
+    LandingRoutingModule
   ] 
 })
 export class LandingModule { }
