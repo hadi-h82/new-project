@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { lang } from '../../app/core/models/lang.model';
+import { TranslationService } from '../i18n/translation.service';
+
+
 
 @Component({
   selector: 'app-landing',
@@ -8,14 +12,22 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit{
 
-  constructor(private router: Router){}
+  foods: lang[] = [
+    {value: 'fa', viewValue: 'Fa'},
+    {value: 'en', viewValue: 'En'},
+  ];
+  constructor(private router: Router,private translationService: TranslationService){}
 
-  ngOnInit(): void {
-    
-  }
-
+  ngOnInit(): void {}
 
   navigation(){
     this.router.navigate(['./auth/login']);
+  }
+
+  onClick(e:any){
+    this.translationService.setLanguage(e.value);
+    if(e.value === 'fa')
+      document.documentElement.setAttribute("dir", "rtl");
+    location.reload();  
   }
 }

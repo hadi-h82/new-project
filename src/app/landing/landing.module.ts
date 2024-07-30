@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingComponent } from './landing.component';
 import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -11,7 +12,9 @@ import { MaterialModule } from '../material/material.module';
   declarations: [LandingComponent],
   imports: [
     CommonModule,
-    LandingRoutingModule
+    LandingRoutingModule,
+    MaterialModule,
+    SharedModule
   ] 
 })
 export class LandingModule { }

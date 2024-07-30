@@ -1,15 +1,15 @@
 <div class="parent d-flex justify-content-center align-items-center">
   <div class="login-box">
     <mat-card class="p-3">
-      <mat-card-title>Login</mat-card-title>
+      <mat-card-title>{{'LOGIN' | translate}}</mat-card-title>
       <mat-card-content class="p-3">
         <form [formGroup]="form" (submit)="submit()">
           <p class="w-100">
             <mat-form-field class="w-100">
               <input
                 type="text"
-                matInput
-                placeholder="Username"
+                matInput              
+                [placeholder]="'USERNAME' | translate"
                 formControlName="userName"
               />
             </mat-form-field>
@@ -20,7 +20,7 @@
               <input
                 type="password"
                 matInput
-                placeholder="Password"
+                [placeholder]="'PASSWORD' | translate"
                 formControlName="password"
               />
             </mat-form-field>
@@ -38,7 +38,7 @@
                 class="btn btn-primary"
                 
               >
-                login
+                {{'SUBMIT' | translate}}
               </button>
             </div>
           </div>

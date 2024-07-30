@@ -1,4 +1,25 @@
-<p>landing works!</p>
 
-<button class="btn btn-primary" (click)="navigation()">go to login page</button>
+<div class="d-flex justify-content-between">
+
+    <div>
+        <p>landing works!</p>
+    </div>
+    
+    <div>
+        <button class="btn btn-primary" (click)="navigation()">{{'GO_TO_LOGIN_PAGE'| translate}}</button>
+    </div>
+    
+    <div>
+        <mat-form-field>
+            <mat-label>{{'SELECT_YOUR_LANGUAGE' | translate}}</mat-label>
+            <mat-select (selectionChange)="onClick($event)">
+              @for (food of foods; track food) {
+                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+    </div>
+
+</div>    
+
 
