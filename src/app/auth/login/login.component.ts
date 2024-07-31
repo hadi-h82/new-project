@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import _ from "lodash";
+import { OptionList } from '../../core/models/option-list.model';
 
 
 @Component({
@@ -20,15 +21,29 @@ export class LoginComponent implements OnInit{
   };
 
 
+  list : OptionList[] = [
+    {
+      id:1,
+      value:'text1'
+    },
+    { id:2,
+      value:'text2'
+    },
+    { id:3,
+      value:'text3'
+    },
+  ]
+  
+
+
   constructor(private router: Router,private fb: FormBuilder){}
    ngOnInit() {
     this.form = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      formArray:  this.createFormArray(
-				[0,1,3],
+      multiCheckbox: [[], [Validators.required]] 
 			
-			)
+			
      });
      console.log('this.form =',this.form);
 
@@ -42,22 +57,22 @@ export class LoginComponent implements OnInit{
   }
 
 
-   createFormArrayCheckbox(fa: FormArray) {
+  //  createFormArrayCheckbox(fa: FormArray) {
     
-		const fg = this.fb.group({
-			checkbox: [ true, [Validators.required]],
-		});
-		fa.push(fg);
-	}
+	// 	const fg = this.fb.group({
+	// 		checkbox: [ null, [Validators.required]],
+	// 	});
+	// 	fa.push(fg);
+	// }
 
 
-   createFormArray<T>(list: T[]) {
-		const fa = this.fb.array([]);
-		list?.forEach( (i) => { 
-			 this.createFormArrayCheckbox(fa);
-		});
-		return fa;
-	}
+  //  createFormArray<T>(list: T[]) {
+	// 	const fa = this.fb.array([]);
+	// 	list?.forEach( (i) => { 
+	// 		 this.createFormArrayCheckbox(fa);
+	// 	});
+	// 	return fa;
+	// }
 
 
 }

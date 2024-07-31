@@ -1,2 +1,3 @@
-<input 
-(change)="valueChanged($event.target)" type="checkbox">
+<div *ngFor="let item of list; let index = index">
+  <input (change)="valueChanged($event.target,item.id)" type="checkbox" />
+</div>

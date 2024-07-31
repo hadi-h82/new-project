@@ -1,51 +1,85 @@
-import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor, FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  forwardRef,
+  Input,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  Validator,
+} from '@angular/forms';
+import { OptionList } from '../../core/models/option-list.model';
 
 @Component({
-  selector: 'app-custom-checkbox-input',
+  selector: 'app-multiCheckbox',
   templateUrl: './custom-checkbox-input.component.html',
   styleUrl: './custom-checkbox-input.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      multi:true,
+      multi: true,
       useExisting: forwardRef(() => CustomCheckboxInputComponent),
-    }
-  ]
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => CustomCheckboxInputComponent),
+      multi: true,
+    },
+  ],
 })
-export class CustomCheckboxInputComponent implements OnInit ,ControlValueAccessor{
+export class CustomCheckboxInputComponent
+  implements OnInit, ControlValueAccessor, Validator
+{
+  @Input('form') form: any;
+  @Input('min') min: number = 0;
+  @Input('max') max: number = 5;
+  @Input('list') list: OptionList[] = [];
 
+  items: number[] = [];
+  isValid: boolean = false;
+  constructor() {}
 
-
-  constructor(){}
-
- 
-
-  valueChanged(val: any) {
-    this.onChange(val.checked);
-  }
-  onChange = (value: Boolean) => {
-    console.log(value);
-    console.log('yes');
+  
+  valueChanged(val: any, id: number) {
+    this.onChange(val.checked, id);
     
+  }
+  onChange = (value: Boolean, id: number) => {
+    if (value) {
+      this.items.push(id);
+    } else this.items = this.items.filter((x) => x != id);
+
+  
+    this.writeValue(this.items);
   };
 
-  ngOnChanges(changes: SimpleChanges): void {
-
+  validate(c: FormControl) {
+    this.isValid = (this.items.length >= this.min)? true :false;
+    return this.isValid
+      ? null
+      : {
+          jsonParseError: {
+            valid: false,
+          },
+        };
   }
 
-  writeValue(value: number): void {
+  ngOnChanges(changes: SimpleChanges): void {}
+
+  writeValue(value: number[] = []): void {
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.writeValue = fn;
   }
 
-  registerOnTouched(fn: any): void {
-  }
+  registerOnTouched(fn: any): void {}
 
-  setDisabledState?(isDisabled: boolean): void {
-  }
+  setDisabledState?(isDisabled: boolean): void {}
 
   ngOnInit(): void {}
 }

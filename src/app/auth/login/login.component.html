@@ -25,13 +25,14 @@
               />
             </mat-form-field>
           </p>
-          <div formArrayName="formArray">
+          <!-- <div formArrayName="formArray">
             <div *ngFor="let item of form.get('formArray')['controls'];let index = index" [formGroupName]="index"   
           >
-            <app-custom-checkbox-input formControlName = "checkbox">
-            </app-custom-checkbox-input>
+            
             </div>
-          </div>
+          </div> -->
+          <app-multiCheckbox formControlName = "multiCheckbox" [form]="form" [list]="list" [min]="2" [max]="2">
+          </app-multiCheckbox>
 
           <p *ngIf="showError" class="error">
             {{ textError }}
@@ -43,7 +44,7 @@
          
                
                 class="btn btn-primary"              
-            
+                [disabled]="!form.valid"
               >
                 {{'SUBMIT' | translate}}
               </button>
