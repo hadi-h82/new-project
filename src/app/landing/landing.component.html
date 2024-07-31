@@ -13,8 +13,8 @@
         <mat-form-field>
             <mat-label>{{'SELECT_YOUR_LANGUAGE' | translate}}</mat-label>
             <mat-select (selectionChange)="onClick($event)">
-              @for (food of foods; track food) {
-                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+              @for (item of items; track item) {
+                <mat-option [value]="item.value">{{item.viewValue}}</mat-option>
               }
             </mat-select>
           </mat-form-field>

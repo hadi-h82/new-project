@@ -10,7 +10,7 @@
                 type="text"
                 matInput              
                 [placeholder]="'USERNAME' | translate"
-                formControlName="userName"
+                formControlName="userName"            
               />
             </mat-form-field>
           </p>
@@ -25,6 +25,13 @@
               />
             </mat-form-field>
           </p>
+          <div formArrayName="formArray">
+            <div *ngFor="let item of form.get('formArray')['controls'];let index = index" [formGroupName]="index"   
+          >
+            <app-custom-checkbox-input formControlName = "checkbox">
+            </app-custom-checkbox-input>
+            </div>
+          </div>
 
           <p *ngIf="showError" class="error">
             {{ textError }}
@@ -35,8 +42,8 @@
               <button
          
                
-                class="btn btn-primary"
-                
+                class="btn btn-primary"              
+            
               >
                 {{'SUBMIT' | translate}}
               </button>

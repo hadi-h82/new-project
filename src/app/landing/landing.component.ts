@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { lang } from '../../app/core/models/lang.model';
 import { TranslationService } from '../i18n/translation.service';
@@ -12,7 +12,7 @@ import { TranslationService } from '../i18n/translation.service';
 })
 export class LandingComponent implements OnInit{
 
-  foods: lang[] = [
+  items: lang[] = [
     {value: 'fa', viewValue: 'Fa'},
     {value: 'en', viewValue: 'En'},
   ];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import _ from "lodash";
 
@@ -11,7 +11,7 @@ import _ from "lodash";
 })
 export class LoginComponent implements OnInit{
 
-  form:FormGroup;
+  form:FormGroup | any;
   showError: boolean = false;
   textError: string = '* incorrect username or password'
   validForm = {
@@ -20,14 +20,17 @@ export class LoginComponent implements OnInit{
   };
 
 
-  constructor(private router: Router,private fb: FormBuilder){
+  constructor(private router: Router,private fb: FormBuilder){}
+   ngOnInit() {
     this.form = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
-     })
-  }
-
-  ngOnInit(): void {
+      formArray:  this.createFormArray(
+				[0,1,3],
+			
+			)
+     });
+     console.log('this.form =',this.form);
 
   }
 
@@ -37,5 +40,24 @@ export class LoginComponent implements OnInit{
     (_.isEqual(this.validForm,this.form.value)) ? this.router.navigate(['/panel']) : this.showError = true;
 
   }
+
+
+   createFormArrayCheckbox(fa: FormArray) {
+    
+		const fg = this.fb.group({
+			checkbox: [ true, [Validators.required]],
+		});
+		fa.push(fg);
+	}
+
+
+   createFormArray<T>(list: T[]) {
+		const fa = this.fb.array([]);
+		list?.forEach( (i) => { 
+			 this.createFormArrayCheckbox(fa);
+		});
+		return fa;
+	}
+
 
 }
