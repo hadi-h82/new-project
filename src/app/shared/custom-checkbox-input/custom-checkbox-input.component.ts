@@ -45,17 +45,12 @@ export class CustomCheckboxInputComponent
 
   
   valueChanged(val: any, id: number) {
-    this.onChange(val.checked, id);
-    
-  }
-  onChange = (value: Boolean, id: number) => {
-    if (value) {
+    if (val.checked) {
       this.items.push(id);
     } else this.items = this.items.filter((x) => x != id);
-
-  
-    this.writeValue(this.items);
-  };
+    this.onChange(this.items); 
+  }
+  onChange = (value: number[]) => {};
 
   validate(c: FormControl) {
     this.isValid = (this.items.length >= this.min)? true :false;
@@ -74,7 +69,7 @@ export class CustomCheckboxInputComponent
   }
 
   registerOnChange(fn: any): void {
-    this.writeValue = fn;
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {}

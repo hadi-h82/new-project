@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit{
   list : OptionList[] = [
     {
       id:1,
-      value:'text1'
+      value:'گزینه ۱'
     },
     { id:2,
-      value:'text2'
+      value:'گزینه ۲'
     },
     { id:3,
-      value:'text3'
+      value:'گرینه ۳'
     },
   ]
   

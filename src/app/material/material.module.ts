@@ -7,6 +7,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const modules = [
   MatFormFieldModule,
@@ -16,7 +17,8 @@ const modules = [
   MatSlideToggleModule,
   MatButtonModule,
   MatToolbarModule,
-  MatSelectModule
+  MatSelectModule,
+  MatCheckboxModule
 
   
 ];
